@@ -24,3 +24,11 @@ services:
       - DRUPAL_DB_USER=${MYSQL_USER}
       - DRUPAL_DB_PASS=${MYSQL_PASSWORD}
       - DRUPAL_DB_HOST=mysql
+
+  test:
+    depends_on:
+      - mysql
+      - drupal
+    build:
+      context: .
+      dockerfile: Dockerfile-test
