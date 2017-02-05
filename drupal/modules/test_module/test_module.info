@@ -1,0 +1,5 @@
+name = Test Module
+description = Test module
+package = Test
+core = 7.x
+php = 7.0

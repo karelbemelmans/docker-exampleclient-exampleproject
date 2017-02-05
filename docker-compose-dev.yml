@@ -1,0 +1,27 @@
+version: '2.1'
+services:
+
+  mysql:
+    image: mysql:5.7
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+      - MYSQL_DATABASE
+      - MYSQL_USER
+      - MYSQL_PASSWORD
+
+  drupal:
+    depends_on:
+      - mysql
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    ports:
+      - 8080:80
+    volumes:
+      - ../drupal/modules:/var/www/html/sites/all/modules/custom
+      - ../drupal/themes:/var/www/html/sites/all/themes/custom
+    environment:
+      - DRUPAL_DB_NAME=${MYSQL_DATABASE}
+      - DRUPAL_DB_USER=${MYSQL_USER}
+      - DRUPAL_DB_PASS=${MYSQL_PASSWORD}
+      - DRUPAL_DB_HOST=mysql

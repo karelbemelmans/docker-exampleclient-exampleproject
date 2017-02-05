@@ -1,0 +1,11 @@
+<?php
+
+/**
+ * Implements hook_page_alter().
+ */
+function test_module_page_alter(&$page) {
+  $page['content']['system_main']['test_message'] = array(
+    '#weight' => 10,
+    '#markup' => t('This is a message from the Test Module, it will appear at the end of the page.'),
+  );
+}

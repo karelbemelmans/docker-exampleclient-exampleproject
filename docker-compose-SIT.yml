@@ -1,0 +1,26 @@
+version: '2.1'
+services:
+
+  mysql:
+    image: mysql:5.7
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+      - MYSQL_DATABASE
+      - MYSQL_USER
+      - MYSQL_PASSWORD
+    volumes:
+      - ../data/db/:/docker-entrypoint-initdb.d/:ro
+
+  drupal:
+    depends_on:
+      - mysql
+    build:
+      context: .
+      dockerfile: Dockerfile-build
+    ports:
+      - 8080:80
+    environment:
+      - DRUPAL_DB_NAME=${MYSQL_DATABASE}
+      - DRUPAL_DB_USER=${MYSQL_USER}
+      - DRUPAL_DB_PASS=${MYSQL_PASSWORD}
+      - DRUPAL_DB_HOST=mysql
