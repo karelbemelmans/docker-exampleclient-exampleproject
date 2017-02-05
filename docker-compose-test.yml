@@ -9,7 +9,7 @@ services:
       - MYSQL_USER
       - MYSQL_PASSWORD
     volumes:
-      - ../data/db/:/docker-entrypoint-initdb.d/:ro
+      - ./data/db/:/docker-entrypoint-initdb.d/:ro
 
   drupal:
     depends_on:
