@@ -14,9 +14,7 @@ services:
   drupal:
     depends_on:
       - mysql
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: 970605007005.dkr.ecr.eu-west-1.amazonaws.com/exampleclient/exampleproject:latest
     environment:
       - DRUPAL_DB_NAME=${MYSQL_DATABASE}
       - DRUPAL_DB_USER=${MYSQL_USER}
@@ -25,7 +23,6 @@ services:
 
   test:
     depends_on:
-      - mysql
       - drupal
     build:
       context: .
