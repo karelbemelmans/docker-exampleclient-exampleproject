@@ -17,8 +17,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    ports:
-      - 8080:80
     environment:
       - DRUPAL_DB_NAME=${MYSQL_DATABASE}
       - DRUPAL_DB_USER=${MYSQL_USER}
