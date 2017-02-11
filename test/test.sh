@@ -13,6 +13,8 @@ echo "Sleeping 30 seconds to give MySQL some time to get ready..."
 sleep 30
 echo "Continue with tests..."
 
+set -x
+
 # When the site is ready, proceed with the tests
 if [ "$1" = "run-tests" ]; then
 
