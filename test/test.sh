@@ -9,12 +9,15 @@ set -e
 # done
 
 # Wait one minute for MySQL to become ready
-echo "Sleeping 1 minute to give MySQL some time to get ready..."
-sleep 60
+echo "Sleeping 30 seconds to give MySQL some time to get ready..."
+sleep 30
 echo "Continue with tests..."
 
 # When the site is ready, proceed with the tests
 if [ "$1" = "run-tests" ]; then
+
+  # Run a simple curl test
+  curl -I http://drupal/index.php
 
   # Just exit for now
   echo "All tests were successfull!"
