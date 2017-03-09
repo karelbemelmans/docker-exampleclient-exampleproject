@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function youcantsayfuckoff_menu() {
+    $items = array();
+
+    $items['youcantstay'] = array(
+        'title' => 'You cannot just say "fuck off"',
+        'page callback' => 'youcantsayfuckoff_detail_page',
+        'access arguments' => array('access content')
+    );
+
+    return $items;
+}
+
+/**
+ * Implements hook_page_alter().
+ */
+function youcantsayfuckoff_detail_page() {
+    $path = drupal_get_path('module', 'youcantsayfuckoff');
+    $data = file($path . '/phrases.txt');
+    $line = trim($data[array_rand($data)]);
+
+    $page['content']['intro'] = array(
+        '#markup' => t('Since you cannot just stay fuck, try this one instead:'),
+    );
+
+    $page['content']['phrase'] = array(
+        '#prefix' => '<h2>&quot;',
+        '#markup' => t('%line', array('%line' => $line)),
+        '#suffix' => '&quot;</h2>',
+    );
+
+    return $page;
+}

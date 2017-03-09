@@ -1,0 +1,5 @@
+name = You can't say fuck off
+description = You really can't just say 'fuck off' to people
+package = Test
+core = 7.x
+php = 7.0
