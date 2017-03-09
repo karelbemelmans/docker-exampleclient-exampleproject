@@ -8,6 +8,8 @@ services:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    volumes:
+      - ./dev/mysql-data:/var/lib/mysql
 
   drupal:
     depends_on:
@@ -18,10 +20,15 @@ services:
     ports:
       - 8080:80
     volumes:
-      - drupal/modules:/var/www/html/sites/all/modules/custom
-      - drupal/themes:/var/www/html/sites/all/themes/custom
+      - ./drupal/modules:/var/www/html/sites/all/modules/custom
+      - ./drupal/themes:/var/www/html/sites/all/themes/custom
     environment:
       - DRUPAL_DB_NAME=${MYSQL_DATABASE}
       - DRUPAL_DB_USER=${MYSQL_USER}
       - DRUPAL_DB_PASS=${MYSQL_PASSWORD}
       - DRUPAL_DB_HOST=mysql
+      # - DRUPAL_MEMCACHE_HOST=memcached
+      # - DRUPAL_MEMCACHE_PORT=11211
+
+  memcached:
+    image: memcached

@@ -3,7 +3,7 @@
 # This script fires up the development environment with the mounted Drupal
 # directory.
 
-COMPOSE_FILE=./docker-compose-dev.yml
+COMPOSE_FILE=./docker-compose.yml
 
 case "$1" in
 
@@ -42,7 +42,7 @@ case "$1" in
     ;;
 
   *)
-    echo "Usage: $0 up|start|down|stop"
+    echo "Usage: $0 up|start|stop|destroy"
     ;;
 esac
 
