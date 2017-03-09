@@ -6,8 +6,8 @@
 function youcantsayfuckoff_menu() {
     $items = array();
 
-    $items['youcantstay'] = array(
-        'title' => 'You cannot just say "fuck off"',
+    $items['youcantsay'] = array(
+        'title' => '',
         'page callback' => 'youcantsayfuckoff_detail_page',
         'access arguments' => array('access content')
     );
@@ -24,7 +24,7 @@ function youcantsayfuckoff_detail_page() {
     $line = trim($data[array_rand($data)]);
 
     $page['content']['intro'] = array(
-        '#markup' => t('Since you cannot just stay fuck, try this one instead:'),
+        '#markup' => t('Since you cannot just say &quot;fuck off&quot;, try this one instead:'),
     );
 
     $page['content']['phrase'] = array(
