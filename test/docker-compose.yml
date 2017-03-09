@@ -14,7 +14,7 @@ services:
   drupal:
     depends_on:
       - mysql
-    image: 970605007005.dkr.ecr.eu-west-1.amazonaws.com/exampleclient/exampleproject:latest
+    image: docker.core.aws.unibet.com/drupal-test/exampleclient-exampleproject:latest
     environment:
       - DRUPAL_DB_NAME=${MYSQL_DATABASE}
       - DRUPAL_DB_USER=${MYSQL_USER}
