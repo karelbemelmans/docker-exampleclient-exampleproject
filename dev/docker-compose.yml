@@ -14,21 +14,20 @@ services:
   drupal:
     depends_on:
       - mysql
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: docker.core.aws.unibet.com/drupal-test/base:latest
     ports:
       - 8080:80
     volumes:
       - ./drupal/modules:/var/www/html/sites/all/modules/custom
       - ./drupal/themes:/var/www/html/sites/all/themes/custom
+      - ./drupal/config/extra.settings.php:/var/www/html/sites/default/extra.settings.php
     environment:
       - DRUPAL_DB_NAME=${MYSQL_DATABASE}
       - DRUPAL_DB_USER=${MYSQL_USER}
       - DRUPAL_DB_PASS=${MYSQL_PASSWORD}
       - DRUPAL_DB_HOST=mysql
-      # - DRUPAL_MEMCACHE_HOST=memcached
-      # - DRUPAL_MEMCACHE_PORT=11211
+      - DRUPAL_MEMCACHE_HOST=memcached
+      - DRUPAL_MEMCACHE_PORT=11211
 
   memcached:
     image: memcached

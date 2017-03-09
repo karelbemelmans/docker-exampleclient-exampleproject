@@ -3,7 +3,7 @@
 # This script fires up the development environment with the mounted Drupal
 # directory.
 
-COMPOSE_FILE=./docker-compose.yml
+COMPOSE_FILE=./dev/docker-compose.yml
 
 case "$1" in
 
@@ -19,7 +19,7 @@ case "$1" in
     echo "Building Docker environment..."
     docker-compose -f $COMPOSE_FILE build --pull
 
-    echo "Destroying Docker environment..."
+    echo "Starting Docker environment..."
     docker-compose -f $COMPOSE_FILE start
     ;;
 
