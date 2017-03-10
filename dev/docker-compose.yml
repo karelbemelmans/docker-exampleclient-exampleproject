@@ -9,7 +9,7 @@ services:
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
-      - ./dev/mysql-data:/var/lib/mysql
+      - ./mysql-data:/var/lib/mysql
 
   drupal:
     depends_on:
@@ -18,9 +18,9 @@ services:
     ports:
       - 8080:80
     volumes:
-      - ./drupal/modules:/var/www/html/sites/all/modules/custom
-      - ./drupal/themes:/var/www/html/sites/all/themes/custom
-      - ./drupal/config/extra.settings.php:/var/www/html/sites/default/extra.settings.php
+      - ../drupal/modules:/var/www/html/sites/all/modules/custom
+      - ../drupal/themes:/var/www/html/sites/all/themes/custom
+      - ../drupal/config/extra.settings.php:/var/www/html/sites/default/extra.settings.php
     environment:
       - DRUPAL_DB_NAME=${MYSQL_DATABASE}
       - DRUPAL_DB_USER=${MYSQL_USER}
