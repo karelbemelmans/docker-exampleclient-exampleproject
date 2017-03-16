@@ -3,6 +3,7 @@ services:
 
   mysql:
     image: mysql:5.7
+    command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci"
     environment:
       - MYSQL_RANDOM_ROOT_PASSWORD=yes
       - MYSQL_DATABASE=${MYSQL_DATABASE}
@@ -26,8 +27,18 @@ services:
       - DRUPAL_DB_USER=${MYSQL_USER}
       - DRUPAL_DB_PASS=${MYSQL_PASSWORD}
       - DRUPAL_DB_HOST=mysql
-      - DRUPAL_MEMCACHE_HOST=memcached
+      - DRUPAL_MEMCACHE_HOST=couchbase
       - DRUPAL_MEMCACHE_PORT=11211
 
-  memcached:
-    image: memcached
+  # Replaced by couchbase-as-memcache
+  # memcached:
+  #   image: memcached
+
+  couchbase:
+    image: couchbase
+    ports:
+      - 8091-8094:8091-8094
+      - 11210:11210
+    volumes:
+      - ./couchbase-data:/opt/couchbase/var
+
