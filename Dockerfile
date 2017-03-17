@@ -1,6 +1,20 @@
 # This is the deployable Docker container.
 FROM docker.core.aws.unibet.com/drupal-test/base:latest
 
+# We enable opcache for our deployment container
+RUN docker-php-ext-install opcache
+
+# set recommended PHP.ini settings
+# see https://secure.php.net/manual/en/opcache.installation.php
+RUN { \
+        echo 'opcache.memory_consumption=128'; \
+        echo 'opcache.interned_strings_buffer=8'; \
+        echo 'opcache.max_accelerated_files=4000'; \
+        echo 'opcache.revalidate_freq=60'; \
+        echo 'opcache.fast_shutdown=1'; \
+        echo 'opcache.enable_cli=1'; \
+    } > /usr/local/etc/php/conf.d/opcache-recommended.ini
+
 # We add our extra settings for this project here.
 COPY drupal/config/extra.settings.php sites/default/extra.settings.php
 
