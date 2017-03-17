@@ -5,6 +5,9 @@
 
 COMPOSE_FILE=./dev/docker-compose.yml
 
+# Always pull the base image to make sure it's fresh
+docker pull docker.core.aws.unibet.com/drupal-test/base:latest
+
 case "$1" in
 
   up)
