@@ -22,6 +22,7 @@ services:
       - ../drupal/modules:/var/www/html/sites/all/modules/custom
       - ../drupal/themes:/var/www/html/sites/all/themes/custom
       - ../drupal/config/extra.settings.php:/var/www/html/sites/default/extra.settings.php
+      - ./drupal-files:/var/www/html/sites/default/files
     environment:
       - DRUPAL_DB_NAME=${MYSQL_DATABASE}
       - DRUPAL_DB_USER=${MYSQL_USER}
