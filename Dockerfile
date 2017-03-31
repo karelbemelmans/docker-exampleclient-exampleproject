@@ -1,5 +1,5 @@
 # This is the deployable Docker container.
-FROM docker.core.aws.unibet.com/drupal-test/base:latest
+FROM karelbemelmans/drupal-base:latest
 
 # We enable opcache for our deployment container
 RUN docker-php-ext-install opcache

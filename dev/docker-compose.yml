@@ -15,9 +15,7 @@ services:
   drupal:
     depends_on:
       - mysql
-    image: docker.core.aws.unibet.com/drupal-test/base:latest
-    ports:
-      - 8080:80
+    image: karelbemelmans/drupal-base:latest
     volumes:
       - ../drupal/modules:/var/www/html/sites/all/modules/custom
       - ../drupal/themes:/var/www/html/sites/all/themes/custom
@@ -55,6 +53,17 @@ services:
       - ../solr-config/5.x:/solr-config/conf
     entrypoint:
       - docker-entrypoint.sh
-      - solr-precreate
+      - solr-create
+      - -c
       - drupal
+      - -d
       - /solr-config
+
+  # We expose port 80
+  varnish:
+    image: karelbemelmans/varnish
+    ports:
+      - "8080:80"
+    volumes:
+      - ../varnish-config/varnish.vcl:/etc/varnish/default.vcl
+      - ../varnish-config/varnish.secret:/etc/varnish/secret
